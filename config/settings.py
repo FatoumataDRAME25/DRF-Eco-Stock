@@ -28,6 +28,15 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# Autorise le frontend Angular (servi en local par ng serve) à appeler l'API.
+# En développement, on liste explicitement les origines plutôt que d'ouvrir CORS_ALLOW_ALL_ORIGINS.
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:4200",
+    "http://127.0.0.1:4200",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,7 +63,7 @@ REST_FRAMEWORK = {
 }
 
 
-
+# Definir la duree d'expiration du token
 from datetime import timedelta
 
 SIMPLE_JWT = {
@@ -66,6 +75,7 @@ SIMPLE_JWT = {
 
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

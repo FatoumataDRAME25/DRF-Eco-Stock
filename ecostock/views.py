@@ -36,7 +36,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     def move(self, request, pk = None):
         product = self.get_object()
         # Vérifier que le produit n'est pas périmé
-        if product.etat == 'périmé':
+        if product.etat == 'périmé':    # ou a la place de périmé on met Product.Etat.PERIME c'est plus optimisé
             return Response ({'error': "Produit périmé, transfert impossible."},
                               status=400
                             )
